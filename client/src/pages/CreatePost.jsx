@@ -16,7 +16,8 @@ const CreatePost = () => {
         e.preventDefault()
 
         try {
-            const response = await fetch('http://localhost:3000/users/create', {
+            const response = await fetch('https://the-blogg-mocha.vercel.app/users/create', {
+            // const response = await fetch('http://localhost:3000/users/create', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

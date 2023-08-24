@@ -9,7 +9,8 @@ const Home = () => {
 
     const fetchPosts = async () => {
         try {
-            const response = await fetch('http://localhost:3000/users/posts')
+            const response = await fetch('https://the-blogg-mocha.vercel.app/users/posts')
+            // const response = await fetch('http://localhost:3000/users/posts')
             const data = await response.json()
             setPosts(data)
         } catch (err) {

@@ -12,6 +12,7 @@ dotenv.config()
 app.use(cors({
     credentials: true,
     origin: 'https://the-blogg-d7ry.vercel.app',
+    // origin: 'http://localhost:5173',
 }))
 
 

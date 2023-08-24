@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 const Home = () => {
     const [posts, setPosts] = useState('')
@@ -23,8 +24,10 @@ const Home = () => {
         {
             posts && posts.map((post) => (
                 <div key={post._id}>
-                    <h1>{post.title}</h1>
+                    <Link to={`/post/${post._id}`}><h1>{post.title}</h1></Link>
                     <p>{post.summary}</p>
+                    <Link to={`/edit/${post._id}`}>Edit</Link>
+                    <hr />
                 </div>
             ))
         }

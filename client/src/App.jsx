@@ -3,15 +3,19 @@ import './App.css'
 import Home from './pages/Home'
 import CreatePost from './pages/CreatePost'
 import Header from './components/Header'
+import EditPost from './pages/EditPost'
+import Post from './pages/Post'
 
 function App() {
   return (
     <>
       <Header />
-      
+
       <Routes>
         <Route path='/' element={<Home />} />
+        <Route path='/post/:id' element={<Post />} />
         <Route path='/create' element={<CreatePost />} />
+        <Route path='/edit/:id' element={<EditPost />} />
       </Routes>
     </>
   )

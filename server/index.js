@@ -2,6 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import dotenv from 'dotenv'
 import mongoose from 'mongoose'
+import authRoutes from './routes/auth.js'
 import usersRoutes from './routes/users.js'
 
 
@@ -11,12 +12,13 @@ app.use(express.json())
 dotenv.config()
 app.use(cors({
     credentials: true,
-    origin: 'https://the-blogg-d7ry.vercel.app',
-    // origin: 'http://localhost:5173',
+    // origin: 'https://the-blogg-d7ry.vercel.app',
+    origin: 'http://localhost:5173',
 }))
 
 
 /* ROUTES */
+app.use('/auth', authRoutes)
 app.use('/users', usersRoutes)
 
 

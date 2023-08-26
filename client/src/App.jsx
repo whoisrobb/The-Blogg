@@ -1,4 +1,6 @@
 import { Route, Routes } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import jwtDecode from 'jwt-decode'
 import './App.css'
 import Home from './pages/Home'
 import Register from './pages/Register'
@@ -7,11 +9,22 @@ import CreatePost from './pages/CreatePost'
 import Header from './components/Header'
 import EditPost from './pages/EditPost'
 import Post from './pages/Post'
+import useAuth from './components/useAuth'
 
 function App() {
+  const [headerKey, setHeaderKey] = useState(0)
+  const { auth, logout } = useAuth()
+
+  useEffect(() => {
+    setHeaderKey(headerKey + 1)
+    console.log(headerKey)
+  }, [auth])
+
+  console.log(auth)
+
   return (
     <>
-      <Header />
+      <Header key={headerKey} auth={auth} logout={logout} />
 
       <Routes>
         <Route path='/' element={<Home />} />

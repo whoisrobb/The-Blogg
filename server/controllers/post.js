@@ -4,7 +4,7 @@ import Post from "../models/post.js"
 /* GET ALL POSTS */
 export const getAllPosts = async (req, res) => {
     try {
-        res.status(201).json(await Post.find())
+        res.status(201).json(await Post.find().populate('author', ['username']))
     } catch (err) {
         res.status(500).send({ err: err.message })
     }
@@ -14,8 +14,8 @@ export const getAllPosts = async (req, res) => {
 /* CREATE POST */
 export const createPost = async (req, res) => {
     try {
-        const { title, summary, content, category } = req.body
-        const post = await Post({ title, summary, content, category })
+        const { title, summary, content, author, category } = req.body
+        const post = await Post({ title, summary, content, author, category })
         const savedpost = await post.save()
         res.status(201).json(savedpost)
     } catch (err) {
@@ -28,8 +28,7 @@ export const createPost = async (req, res) => {
 export const getSinglePost = async (req, res) => {
     try {
         const { id } = req.params
-        // res.status(200).json(await Post.findById(id).populate('author', ['username']))
-        res.status(200).json(await Post.findById(id))
+        res.status(200).json(await Post.findById(id).populate('author', ['username']))
     } catch (err) {
         res.status(500).json({ message: err.message })
     }

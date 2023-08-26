@@ -26,6 +26,7 @@ const Home = () => {
                 <div key={post._id}>
                     <Link to={`/post/${post._id}`}><h1>{post.title}</h1></Link>
                     <p>{post.summary}</p>
+                    <p>By {post.author.username}</p>
                     <Link to={`/edit/${post._id}`}>Edit</Link>
                     <hr />
                 </div>

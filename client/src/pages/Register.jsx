@@ -15,6 +15,7 @@ const Register = () => {
 
   const submit = async (submitData) => {
     try {
+      // const response = await fetch('https://the-blogg-mocha.vercel.app/auth/register', {
       const response = await fetch('http://localhost:3000/auth/register', {
         method: 'POST',
         headers: {

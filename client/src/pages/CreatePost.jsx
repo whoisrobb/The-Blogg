@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import jwtDecode from 'jwt-decode'
+import React, { useEffect, useState } from 'react'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 
@@ -6,10 +7,17 @@ const CreatePost = () => {
     const [title, setTitle] = useState('')
     const [summary, setSummary] = useState('')
     const [content, setContent] = useState('')
+    const [author, setAuthor] = useState('')
     const [selectedCategory, setSelectedCategory] = useState('Health')
 
-    const formData = { title, summary, content, category: selectedCategory }
+    useEffect(() => {
+        const { id } = jwtDecode(localStorage.getItem('accessToken'))
+        // console.log(username)
+        setAuthor(id)
+    }, [])
 
+    const formData = { title, summary, author, content, category: selectedCategory }
+    console.log(formData)
 
     const handleSubmit = async (e) => {
         e.preventDefault()

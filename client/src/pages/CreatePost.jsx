@@ -2,6 +2,7 @@ import jwtDecode from 'jwt-decode'
 import React, { useEffect, useState } from 'react'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
+import { apiUrl } from '../utils/url'
 
 const CreatePost = () => {
     const [title, setTitle] = useState('')
@@ -34,8 +35,7 @@ const CreatePost = () => {
         // console.log(formData)
 
         try {
-            const response = await fetch('https://the-blogg-mocha.vercel.app/users/create', {
-            // const response = await fetch('http://localhost:3000/users/create', {
+            const response = await fetch(`${apiUrl}/users/create`, {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json"

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Navigate } from 'react-router-dom'
+import { apiUrl } from '../utils/url'
 
 const Register = () => {
   const [firstName, setFirstName] = useState('')
@@ -15,8 +16,7 @@ const Register = () => {
 
   const submit = async (submitData) => {
     try {
-      const response = await fetch('https://the-blogg-mocha.vercel.app/auth/register', {
-      // const response = await fetch('http://localhost:3000/auth/register', {
+      const response = await fetch(`${apiUrl}/auth/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

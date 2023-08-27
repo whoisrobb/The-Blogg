@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { apiUrl } from '../utils/url'
 
 const Home = () => {
     const [posts, setPosts] = useState('')
@@ -10,8 +11,7 @@ const Home = () => {
 
     const fetchPosts = async () => {
         try {
-            const response = await fetch('https://the-blogg-mocha.vercel.app/users/posts')
-            // const response = await fetch('http://localhost:3000/users/posts')
+            const response = await fetch(`${apiUrl}/users/posts`)
             const data = await response.json()
             setPosts(data)
         } catch (err) {

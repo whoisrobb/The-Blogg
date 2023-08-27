@@ -8,6 +8,7 @@ const CreatePost = () => {
     const [summary, setSummary] = useState('')
     const [content, setContent] = useState('')
     const [author, setAuthor] = useState('')
+    const [files, setFiles] = useState(null)
     const [selectedCategory, setSelectedCategory] = useState('Health')
 
     useEffect(() => {
@@ -16,20 +17,27 @@ const CreatePost = () => {
         setAuthor(id)
     }, [])
 
-    const formData = { title, summary, author, content, category: selectedCategory }
-    console.log(formData)
+    // const formData = { title, summary, author, content, category: selectedCategory }
+    // console.log(formData)
 
     const handleSubmit = async (e) => {
         e.preventDefault()
 
+        const formData = new FormData()
+        formData.append('title', title)
+        formData.append('summary', summary)
+        formData.append('author', author)
+        formData.append('content', content)
+        formData.append('category', selectedCategory)
+        formData.append('image', files)
+
+        console.log(formData)
+
         try {
-            // const response = await fetch('https://the-blogg-mocha.vercel.app/users/create', {
-            const response = await fetch('http://localhost:3000/users/create', {
+            const response = await fetch('https://the-blogg-mocha.vercel.app/users/create', {
+            // const response = await fetch('http://localhost:3000/users/create', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData)
+                body: formData
             })
             .then((response) => {
                 if (response.ok) {
@@ -87,6 +95,15 @@ const CreatePost = () => {
                     <option value="food">Food</option>
                     <option value="travel">Travel</option>
                 </select>
+            </div>
+
+            <div className="file-input">
+                <label>
+                    <input
+                        type="file"
+                        onChange={(e) => setFiles(e.target.files[0])}
+                    />
+                </label>
             </div>
 
             <ReactQuill value={content} onChange={(value) => setContent(value)} />

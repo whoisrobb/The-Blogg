@@ -20,8 +20,8 @@ const EditPost = () => {
 
     const fetchPosts = async () => {
         try {
-            // const response = await fetch(`https://the-blogg-mocha.vercel.app/users/post/${id}`)
-            const response = await fetch(`http://localhost:3000/users/post/${id}`)
+            const response = await fetch(`https://the-blogg-mocha.vercel.app/users/post/${id}`)
+            // const response = await fetch(`http://localhost:3000/users/post/${id}`)
             const data = await response.json()
             setTitle(data.title)
             setSummary(data.summary)
@@ -34,8 +34,8 @@ const EditPost = () => {
 
     const handleDelete = async () => {
         try {
-            // const response = await fetch(`https://the-blogg-mocha.vercel.app/users/delete/${id}`, {
-            const response = await fetch(`http://localhost:3000/users/delete/${id}`, {
+            const response = await fetch(`https://the-blogg-mocha.vercel.app/users/delete/${id}`, {
+            // const response = await fetch(`http://localhost:3000/users/delete/${id}`, {
                 method: 'DELETE',
             })
     
@@ -55,8 +55,8 @@ const EditPost = () => {
         e.preventDefault()
 
         try {
-            // const response = await fetch(`https://the-blogg-mocha.vercel.app/users/update/${id}`, {
-            const response = await fetch(`http://localhost:3000/users/update/${id}`, {
+            const response = await fetch(`https://the-blogg-mocha.vercel.app/users/update/${id}`, {
+            // const response = await fetch(`http://localhost:3000/users/update/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

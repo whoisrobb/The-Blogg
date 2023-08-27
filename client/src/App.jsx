@@ -17,10 +17,10 @@ function App() {
 
   useEffect(() => {
     setHeaderKey(headerKey + 1)
-    console.log(headerKey)
+    // console.log(headerKey)
   }, [auth])
 
-  console.log(auth)
+  // console.log(auth)
 
   return (
     <>

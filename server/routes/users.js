@@ -1,4 +1,5 @@
 import express from 'express'
+import { upload } from '../controllers/upload.js'
 import { createPost, deletePost, getAllPosts, getSinglePost, updatePost } from "../controllers/post.js"
 
 
@@ -10,7 +11,7 @@ router.get('/posts', getAllPosts)
 
 
 /* CREATE POST */
-router.post('/create', createPost)
+router.post('/create', upload.single('image'), createPost)
 
 
 /* GET ONE POST */

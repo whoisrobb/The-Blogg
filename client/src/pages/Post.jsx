@@ -9,8 +9,8 @@ const Post = () => {
 
       const fetchPost = async () => {
           try {
-            // const response = await fetch(`https://https://the-blogg-mocha.vercel.app/users/post/${id}`);
-            const response = await fetch(`http://localhost:3000/users/post/${id}`);
+            const response = await fetch(`https://https://the-blogg-mocha.vercel.app/users/post/${id}`);
+            // const response = await fetch(`http://localhost:3000/users/post/${id}`);
             const data = await response.json();
             setPost(data);
           } catch (error) {
@@ -21,6 +21,7 @@ const Post = () => {
       fetchPost()
     }, [])
 
+    console.log(post)
 
   return (
     <div>
@@ -29,6 +30,11 @@ const Post = () => {
             <h1 className='title'>{post.title}</h1>
             <p className='summary'>{post.summary}</p>
             <p>Author: {post.author.username}</p>
+            {
+              post.imageUrl && <img src={`https://the-blogg-d7ry.vercel.app/uploads/${post.imageUrl}`} alt={post.title} />
+              // post.imageUrl && <img src={`http://localhost:3000/uploads/${post.imageUrl}`} alt={post.title} />
+
+            }
             <div className='content' dangerouslySetInnerHTML={{ __html: post.content }} />
             <hr />
           </>

@@ -10,8 +10,8 @@ const Home = () => {
 
     const fetchPosts = async () => {
         try {
-            // const response = await fetch('https://the-blogg-mocha.vercel.app/users/posts')
-            const response = await fetch('http://localhost:3000/users/posts')
+            const response = await fetch('https://the-blogg-mocha.vercel.app/users/posts')
+            // const response = await fetch('http://localhost:3000/users/posts')
             const data = await response.json()
             setPosts(data)
         } catch (err) {
@@ -26,7 +26,7 @@ const Home = () => {
                 <div key={post._id}>
                     <Link to={`/post/${post._id}`}><h1>{post.title}</h1></Link>
                     <p>{post.summary}</p>
-                    <p>By {post.author.username}</p>
+                    <p>By: {post.author.username}</p>
                     <Link to={`/edit/${post._id}`}>Edit</Link>
                     <hr />
                 </div>

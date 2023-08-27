@@ -15,7 +15,8 @@ export const getAllPosts = async (req, res) => {
 export const createPost = async (req, res) => {
     try {
         const { title, summary, content, author, category } = req.body
-        const post = await Post({ title, summary, content, author, category })
+        const image = req.file.filename
+        const post = await Post({ title, summary, content, author, category, imageUrl: image })
         const savedpost = await post.save()
         res.status(201).json(savedpost)
     } catch (err) {

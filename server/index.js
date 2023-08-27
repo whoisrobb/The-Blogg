@@ -18,8 +18,8 @@ dotenv.config()
 
 app.use(cors({
     credentials: true,
-    origin: 'https://the-blogg-d7ry.vercel.app',
-    // origin: 'http://localhost:5173',
+    // origin: 'https://the-blogg-d7ry.vercel.app',
+    origin: 'http://localhost:5173',
 }))
 
 const __filename = fileURLToPath(import.meta.url)

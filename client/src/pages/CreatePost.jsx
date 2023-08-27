@@ -17,27 +17,31 @@ const CreatePost = () => {
         setAuthor(id)
     }, [])
 
-    // const formData = { title, summary, author, content, category: selectedCategory }
+    const formData = { title, summary, author, content, category: selectedCategory }
     // console.log(formData)
 
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        const formData = new FormData()
-        formData.append('title', title)
-        formData.append('summary', summary)
-        formData.append('author', author)
-        formData.append('content', content)
-        formData.append('category', selectedCategory)
-        formData.append('image', files)
+        // const formData = new FormData()
+        // formData.append('title', title)
+        // formData.append('summary', summary)
+        // formData.append('author', author)
+        // formData.append('content', content)
+        // formData.append('category', selectedCategory)
+        // formData.append('image', files)
 
-        console.log(formData)
+        // console.log(formData)
 
         try {
             const response = await fetch('https://the-blogg-mocha.vercel.app/users/create', {
             // const response = await fetch('http://localhost:3000/users/create', {
                 method: 'POST',
-                body: formData
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(formData)
+                // body: formData
             })
             .then((response) => {
                 if (response.ok) {

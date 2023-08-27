@@ -16,12 +16,14 @@ app.use(express.json())
 
 dotenv.config()
 
-app.use(cors({
+/* app.use(cors({
     credentials: true,
-    origin: 'https://the-blogg-d7ry.vercel.app',
-    // origin: 'http://localhost:5173',
+    // origin: 'https://the-blogg-d7ry.vercel.app',
+    origin: 'http://localhost:5173',
 }))
+*/
 
+app.use(cors())
 // const __filename = fileURLToPath(import.meta.url)
 // const __dirname = dirname(__filename)
 // app.use('/uploads', express.static(__dirname + '/uploads'));

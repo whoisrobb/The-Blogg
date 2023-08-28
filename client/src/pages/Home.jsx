@@ -11,13 +11,25 @@ const Home = () => {
 
     const fetchPosts = async () => {
         try {
-            const response = await fetch(`${apiUrl}/users/posts`)
-            const data = await response.json()
-            setPosts(data)
+            const response = await fetch(`${apiUrl}/users/posts`, {
+                method: 'GET',
+                mode: 'no-cors', // Change 'no-cors' to 'cors' to allow access to response data
+            });
+    
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+    
+            const data = await response.json(); // Await the response.json() method
+    
+            setPosts(data);
         } catch (err) {
-            console.error(err)
+            console.error(err);
         }
     }
+    
+
+    console.log(posts)
 
   return (
     <div>

@@ -1,9 +1,0 @@
-[build]
-  command = "node index.js"
-  publish = "server"
-
-[build.environment]
-  NODE_VERSION = "18"
-
-[context.production.environment]
-  NODE_ENV = "production"

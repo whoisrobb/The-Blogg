@@ -14,34 +14,27 @@ const CreatePost = () => {
 
     useEffect(() => {
         const { id } = jwtDecode(localStorage.getItem('accessToken'))
-        // console.log(username)
         setAuthor(id)
     }, [])
-
-    const formData = { title, summary, author, content, category: selectedCategory }
-    // console.log(formData)
 
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        // const formData = new FormData()
-        // formData.append('title', title)
-        // formData.append('summary', summary)
-        // formData.append('author', author)
-        // formData.append('content', content)
-        // formData.append('category', selectedCategory)
-        // formData.append('image', files)
+        const formData = new FormData()
+        formData.append('title', title)
+        formData.append('summary', summary)
+        formData.append('author', author)
+        formData.append('content', content)
+        formData.append('category', selectedCategory)
+        formData.append('image', files)
 
-        // console.log(formData)
+        console.log(formData)
 
         try {
             const response = await fetch(`${apiUrl}/users/create`, {
                 method: 'POST',
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(formData)
-                // body: formData
+                mode: 'cors',
+                body: formData
             })
             .then((response) => {
                 if (response.ok) {
@@ -56,7 +49,9 @@ const CreatePost = () => {
     }
 
   return (
-    <div>
+    <section id='create'>
+        <div className="wrapper">
+            
         <form onSubmit={handleSubmit}>
             
             <div className="title-input">
@@ -114,7 +109,8 @@ const CreatePost = () => {
 
             <button type='submit'>Post</button>
         </form>
-    </div>
+        </div>
+    </section>
   )
 }
 

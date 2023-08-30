@@ -37,12 +37,62 @@ const Login = () => {
       console.error(err)
     }
   }
+  
+    const fiction = [
+        // {
+        //   "username": "Tony Stark",
+        //   "email": "tony.stark@example.com",
+        //   "password": "password123"
+        // },
+        // {
+        //   "username": "Clark Kent",
+        //   "email": "clark.kent@example.com",
+        //   "password": "kryptonite123"
+        // },
+        // {
+        //   "username": "Diana Prince",
+        //   "email": "diana.prince@example.com",
+        //   "password": "amazon123"
+        // },
+        // {
+        //   "username": "Peter Parker",
+        //   "email": "peter.parker@example.com",
+        //   "password": "spidey123"
+        // },
+        {
+          "username": "Bruce Wayne",
+          "email": "bruce.wayne@example.com",
+          "password": "bat123"
+        },
+        // {
+        //   "username": "Steve Rogers",
+        //   "email": "steve.rogers@example.com",
+        //   "password": "shield123"
+        // },
+        // {
+        //   "username": "Natasha Romanoff",
+        //   "email": "natasha.romanoff@example.com",
+        //   "password": "redroom123"
+        // },
+        //  {
+        //   "username": "Arthur Curry",
+        //   "email": "arthur.curry@example.com",
+        //   "password": "aquaman123"
+        //  },
+        //  {
+        //   "username": "Wanda Maximoff",
+        //   "email": "scarlet.witch@example.com",
+        //   "password": "scarletwitch123"
+        //  }
+      ]
+
 
   if (success) return <Navigate to={'/'} />
 
   return (
     <div>
       Login
+      { JSON.stringify(fiction) }
       <form onSubmit={handleSubmit}>
         
         <label>

@@ -55,7 +55,7 @@ const EditPost = () => {
 
         try {
             const response = await fetch(`${apiUrl}/users/update/${id}`, {
-                method: 'PUT',
+                method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -75,11 +75,14 @@ const EditPost = () => {
         }
     }
 
+    console.log(formData)
 
     if (success) return <Navigate to={'/'} />
 
   return (
-    <div>
+    <section id='edit'>
+        <div className="wrapper">
+            
         <form onSubmit={handleSubmit}>
             
             <div className="title-input">
@@ -129,7 +132,8 @@ const EditPost = () => {
             <button type='submit'>Edit Post</button>
             <button onClick={handleDelete}>Delete Post</button>
         </form>
-    </div>
+        </div>
+    </section>
   )
 }
 

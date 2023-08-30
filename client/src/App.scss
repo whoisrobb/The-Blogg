@@ -1,0 +1,215 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,400;6..12,500;6..12,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap');
+
+
+$headers: 'space grotesk';
+// $display: 'Ubuntu';
+$display: 'Nunito Sans';
+$ital: 'Playfair Display';
+$dark: #333333;
+$light: #ededed;
+
+body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    // padding-top: 4rem;
+}
+
+img {
+    width: 100%;
+}
+
+.wrapper {
+    max-width: 40rem;
+}
+
+h1, h2, h3, h4, p {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+button {
+    cursor: pointer;
+}
+
+
+/* HEADER COMPONENT */
+.header {
+    background: $dark;
+    // background: $light;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 4rem;
+
+    a {
+        text-decoration: none;
+        color: $light;
+    }
+
+    nav {
+       
+        .actions {
+            display: flex;
+            justify-content: space-between;
+
+            a, button {
+                margin-left: 1rem;
+            }
+        }
+    }
+}
+
+
+/* HOME SECTION */
+#home {
+    background: $dark;
+    padding: 4rem;
+
+    h1 {
+        font-family: $headers;
+    }
+    
+    .intro {
+        width: 80%;
+
+        h1 {
+            text-transform: capitalize;
+            color: rgba($light, .8);
+            font-size: 5rem;
+        }
+    }
+    
+    .categories {
+        margin: 1rem 0 2rem 0;
+        
+        button {
+            margin-right: 1rem;
+            padding: 0;
+            text-transform: capitalize;
+            background: transparent;
+            border: none;
+            color: rgba($light, .8);
+            font-family: $display;
+            font-size: 1.1rem;
+        }
+    }
+
+    .posts {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        grid-auto-rows: minmax(100px, auto);
+        
+        .post {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            color: $light;
+            
+            &:nth-child(odd) {
+              align-self: start;
+            }
+        
+            &:nth-child(even) {
+              align-self: end;
+            }
+
+            h1 {
+                color: $light;
+            }
+
+            .details {
+                display: flex;
+                justify-content: space-between;
+                width: 100%;
+                font-family: $ital;
+                margin: 1rem 0;
+                font-size: .8rem;
+
+                a {
+                    color: $light;
+                }
+            }
+
+            .summary {
+                font-family: $display;
+                color: rgba($light, .8);
+            }
+
+            a.edit {
+                color: $light;
+                border: 1px solid rgba($light, .8);
+                font-family: $display;
+                padding: 0.15rem 1.3rem;
+                margin-top: 1rem;
+
+                &:hover {
+                    background: $light;
+                    color: $dark;
+                }
+            }
+          }
+      }
+      
+}
+
+
+/* POST PAGE */
+#post {
+    padding: 4rem;
+    display: flex;
+    justify-content: center;
+    background: $light;
+    font-family: $display;
+    min-height: 100vh;
+
+    .wrapper {
+        color: $dark;
+
+        h1.title {
+            font-family: $headers;
+            font-weight: 700;
+            font-size: 2rem;
+        }
+
+        .summary {
+            margin: 1rem 0;
+        }
+
+        a.author {
+            color: black;
+            font-family: $ital;
+            font-size: .8rem;
+        }
+
+        img {
+            margin: 1rem 0;
+        }
+    }
+}
+
+
+/* EDIT & CREATE PAGES */
+#edit, #create {
+    display: flex;
+    justify-content: center;
+    background: $light;
+    min-height: 80vh;
+    padding: 4rem;
+}
+
+
+/* CREATE PAGE */
+/* EDIT PAGE */

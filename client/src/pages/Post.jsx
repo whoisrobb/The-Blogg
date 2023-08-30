@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { apiUrl } from '../utils/url'
 
 const Post = () => {
@@ -21,24 +21,21 @@ const Post = () => {
       fetchPost()
     }, [])
 
-    console.log(post)
-
   return (
-    <div>
+    <section id='post'>
         {post ? (
-          <>
+          <div className='wrapper'>
             <h1 className='title'>{post.title}</h1>
             <p className='summary'>{post.summary}</p>
-            <p>Author: {post.author.username}</p>
+            <Link className='author' to={'#'}>Author: {post.author.username}</Link>
             {
               post.imageUrl && <img src={`${apiUrl}/uploads/${post.imageUrl}`} alt={post.title} />
 
             }
             <div className='content' dangerouslySetInnerHTML={{ __html: post.content }} />
-            <hr />
-          </>
+          </div>
         ) : ''}
-      </div>
+      </section>
   )
 }
 

@@ -4,19 +4,21 @@ import { Link } from 'react-router-dom'
 const Header = ({ auth, logout }) => {
 
   return (
-    <div>
+    <div className='header'>
       <div className="logo">
         <Link to={'/'}>The Blogg</Link>
       </div>
       <nav>
-        <Link to={'/register'}>Register</Link>
         {
           auth ? 
-          <div>
+          <div className='actions'>
             <Link to={'/create'}>Create</Link>
             <button onClick={logout}>Logout</button>
           </div> :
-          <Link to={'/login'}>Login</Link>
+          <div className='actions'>
+            <Link to={'/register'}>Register</Link>
+            <Link to={'/login'}>Login</Link>
+          </div>
         }
       </nav>
     </div>

@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { apiUrl } from '../utils/url'
 
-const Home = () => {
+const Home = ({ userId }) => {
     const [posts, setPosts] = useState('')
+
+    const categories = ['health', 'career', 'travel', 'technology', 'food']
 
     useEffect(() => {
         fetchPosts()
@@ -11,40 +13,62 @@ const Home = () => {
 
     const fetchPosts = async () => {
         try {
-            const response = await fetch(`${apiUrl}/users/posts`, {
+            fetch(`${apiUrl}/users/posts`, {
                 method: 'GET',
-                mode: 'no-cors', // Change 'no-cors' to 'cors' to allow access to response data
-            });
-    
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-    
-            const data = await response.json(); // Await the response.json() method
-    
-            setPosts(data);
+                mode: 'cors'
+            })
+            .then((response) => {
+                if (!response.ok) {
+                    console.log(response)
+                    throw new Error(`HTTP error! Status: ${response.status}`)
+                }
+                return response.json()
+            })
+            .then((data) => {
+                setPosts(data)
+            })
         } catch (err) {
-            console.error(err);
+            console.error(err)
         }
     }
-    
-
-    console.log(posts)
 
   return (
-    <div>
-        {
-            posts && posts.map((post) => (
-                <div key={post._id}>
-                    <Link to={`/post/${post._id}`}><h1>{post.title}</h1></Link>
-                    <p>{post.summary}</p>
-                    <p>By: {post.author.username}</p>
-                    <Link to={`/edit/${post._id}`}>Edit</Link>
-                    <hr />
-                </div>
-            ))
-        }
-    </div>
+    <section id='home'>
+        <div className="intro">
+            <h1>voyages, vitals, ventures, victory & vittles</h1>
+        </div>
+
+        <div className="categories">
+            <button>all</button>
+            {
+                categories.map((cat, index) => (
+                    <button key={index}>{cat}</button>
+                ))
+            }
+        </div>
+        
+        <div className="posts">
+            {
+                posts && posts.map((post) => (
+                    <div key={post._id} className='post'>
+                        <Link to={`/post/${post._id}`}><img src={`${apiUrl}/uploads/${post.imageUrl}`} alt="" /></Link>
+                        <Link to={`/post/${post._id}`}><h1>{post.title}</h1></Link>
+                        <div className="details">
+                            <Link to={'#'}>By {post.author.username}</Link>
+                            <p>{post.createdAt}</p>
+                        </div>
+                        <p className='summary'>{post.summary}</p>
+                        {
+                            userId && userId == post.author._id ?
+                                <Link className='edit' to={`/edit/${post._id}`}>edit</Link>
+                            : null
+                        }
+                        <hr />
+                    </div>
+                ))
+            }
+        </div>
+    </section>
   )
 }
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Navigate } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import { apiUrl } from '../utils/url'
 
 const Login = () => {
@@ -90,36 +90,41 @@ const Login = () => {
   if (success) return <Navigate to={'/'} />
 
   return (
-    <div>
-      Login
-      { JSON.stringify(fiction) }
+    <section id='login'>
       <form onSubmit={handleSubmit}>
+      { JSON.stringify(fiction) }
+        Login
         
-        <label>
+        {/* <label> */}
           <input
               type="text"
               name='username'
+              className='username'
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               placeholder='Username'
               required
           />
-        </label>
+        {/* </label> */}
 
-        <label>
+        {/* <label> */}
           <input
               type="password"
               name='password'
+              className='password'
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder='Password'
               required
           />
-        </label>
+        {/* </label> */}
 
         <button type='submit'>submit</button>
+        
+        <p>Don't have an account?</p>
+        <Link to={'/register'}>Sign up</Link>
       </form>
-    </div>
+    </section>
   )
 }
 

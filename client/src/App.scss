@@ -5,7 +5,6 @@
 
 
 $headers: 'space grotesk';
-// $display: 'Ubuntu';
 $display: 'Nunito Sans';
 $ital: 'Playfair Display';
 $dark: #333333;
@@ -15,7 +14,7 @@ body {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    // padding-top: 4rem;
+    overflow-x: hidden;
 }
 
 img {
@@ -24,6 +23,8 @@ img {
 
 .wrapper {
     max-width: 40rem;
+    min-width: 25rem;
+    margin: 4rem 0;
 }
 
 h1, h2, h3, h4, p {
@@ -75,10 +76,16 @@ button {
 /* HOME SECTION */
 #home {
     background: $dark;
-    padding: 4rem;
+    padding: 0 4rem;
+    min-height: 100vh;
 
     h1 {
         font-family: $headers;
+    }
+    
+    .wrap {
+        position: relative;
+        top: 4rem;
     }
     
     .intro {
@@ -168,7 +175,7 @@ button {
 
 /* POST PAGE */
 #post {
-    padding: 4rem;
+    padding: 0 4rem;
     display: flex;
     justify-content: center;
     background: $light;
@@ -206,10 +213,174 @@ button {
     display: flex;
     justify-content: center;
     background: $light;
-    min-height: 80vh;
-    padding: 4rem;
+    min-height: 100vh;
+    font-family: $display;
+    color: $dark;
+
+    form {
+        width: 100%;
+        // background: red;
+    }
+    
+    .categories-input {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+
+        select {
+            padding: 0.5rem;
+            background: transparent;
+            border: 2px solid rgba($dark, .1);
+            font-family: $display;
+        }
+    }
+
+    input.text {
+        margin-bottom: 1rem;
+        padding: .5rem;
+        border: 2px solid rgba($dark, .1);
+        width: 100%;
+        background: transparent;
+        font-family: $display;
+
+        &:valid {
+            background: transparent;
+        }
+
+        &::placeholder {
+            font-family: $display;
+            margin-left: 0.5rem;
+        }
+    }
+
+    .file-input-container {
+        border: 2px solid rgba($dark, .1);
+        margin: 1rem 0;
+        width: 100%;
+
+        input {
+            display: none;
+        }
+
+        .file-label {
+            display: inline-block;
+            padding: 10px 20px;
+            background: transparent;
+            color: $dark;
+            border: none;
+            cursor: pointer;
+        }
+
+        .button {
+            padding: .3rem 1rem;
+            font-family: $display;
+            border: 2px solid rgba($dark, .1);
+
+            &:hover {
+                border: 2px solid rgba(#2580ff, .3);
+            }
+        }
+    }
+
+    .quill {
+        margin-bottom: 3rem;
+        position: relative;
+
+        .ql-container {
+            font-family: $display;
+            font-size: 1rem;
+            color: $dark;
+            border-top: 1px solid #ccc;
+        }
+
+        .ql-toolbar {
+            position: absolute;
+            bottom: -2.5rem;
+            left: 0;
+            right: 0;
+        }
+    }
+
+    button.submit {
+        width: 100%;
+        padding: 0.6rem;
+        font-family: $display;
+        color: $light;
+        background: $dark;
+        border: none;
+    }
 }
 
 
 /* CREATE PAGE */
 /* EDIT PAGE */
+
+
+/* LOGIN & REGISTER PAGES */
+#register, #login {
+    height: 100vh;
+    width: 100vw;
+    background: $light;
+    display: flex;
+    justify-content: center;
+
+    form {
+        margin-top: 4rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border: 1px solid black;
+        padding: 1rem;
+
+        .name {
+            // width: 100%;
+            // background: red;
+        }
+
+        input {
+            margin: 0.5rem;
+            padding: 0.5rem;
+        }
+
+        label {
+            width: 100%;
+        }
+
+        input.password, input.email, input.username {
+            width: 100%;
+        }
+    }
+}
+
+
+/* LOGIN PAGE */
+/* REGISTER */
+
+
+/* MEDIA QUERIES */
+@media (max-width: 768px) {
+
+    .wrapper {
+        width: 100%;
+        margin: 1rem;
+    }
+
+    #home {
+        padding: 0 1rem;
+
+        .intro {
+
+            h1 {
+                font-size: 3.5rem;
+            }
+        }
+
+        .posts {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    #post {
+        padding: 0 1rem;
+    }
+}

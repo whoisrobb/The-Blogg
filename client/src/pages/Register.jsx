@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Navigate } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import { apiUrl } from '../utils/url'
 
 const Register = () => {
@@ -95,69 +95,78 @@ const Register = () => {
       // ]
 
   return (
-    <div>
-      Register
-      {JSON.stringify(fiction)}
+    <section id='register'>
       <form onSubmit={handleSubmit}>
+        Register
         
-        <label>
+        <div className="name">
+        {/* <label> */}
           <input
               type="text"
               name='firstName'
+              className='firstName'
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
               placeholder='First Name'
               required
           />
-        </label>
+        {/* </label> */}
 
-        <label>
+        {/* <label> */}
           <input
               type="text"
               name='lastName'
+              className='lastName'
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
               placeholder='Last Name'
               required
           />
-        </label>
+        {/* </label> */}
+        </div>
 
-        <label>
+        {/* <label> */}
           <input
               type="text"
               name='username'
+              className='username'
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               placeholder='Username'
               required
           />
-        </label>
+        {/* </label> */}
 
-        <label>
+        {/* <label> */}
           <input
               type="text"
               name='email'
+              className='email'
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder='E-Mail'
               required
           />
-        </label>
+        {/* </label> */}
 
-        <label>
+        {/* <label> */}
           <input
               type="password"
               name='password'
+              className='password'
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder='Password'
               required
           />
-        </label>
+        {/* </label> */}
 
         <button type='submit'>submit</button>
-      </form>  
-    </div>
+      </form>
+      
+      <p>Already have an account?</p>
+      <Link to={'/login'}>Login</Link>
+    </section>
   )
 }
 

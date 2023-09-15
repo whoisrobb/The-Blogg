@@ -129,8 +129,8 @@ const EditPost = () => {
 
             <ReactQuill value={content} onChange={(value) => setContent(value)} />
 
-            <button type='submit'>Edit Post</button>
-            <button onClick={handleDelete}>Delete Post</button>
+            <button className='submit' type='submit'>Edit Post</button>
+            <button className='delete' onClick={handleDelete}>Delete Post</button>
         </form>
         </div>
     </section>

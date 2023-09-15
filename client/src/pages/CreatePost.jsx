@@ -58,6 +58,7 @@ const CreatePost = () => {
                 <label>
                     <input
                         type="text"
+                        className="text"
                         name='title'
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
@@ -71,6 +72,7 @@ const CreatePost = () => {
                 <label>
                     <input
                         type="text"
+                        className="text"
                         name='summary'
                         value={summary}
                         onChange={(e) => setSummary(e.target.value)}
@@ -96,18 +98,24 @@ const CreatePost = () => {
                 </select>
             </div>
 
-            <div className="file-input">
-                <label>
-                    <input
-                        type="file"
-                        onChange={(e) => setFiles(e.target.files[0])}
-                    />
+            <div className="file-input-container">
+                <input
+                    type="file"
+                    className='file-input'
+                    id='file-input'
+                    onChange={(e) => setFiles(e.target.files[0])}
+                    aria-label="File browser example"
+                />
+                <label htmlFor='file-input' className="file-label">
+                    <span className="file-label-text">
+                        {files ? files.name : <div className='button'>Choose a file</div>}
+                    </span>
                 </label>
             </div>
-
+            
             <ReactQuill value={content} onChange={(value) => setContent(value)} />
 
-            <button type='submit'>Post</button>
+            <button className='submit' type='submit'>Post</button>
         </form>
         </div>
     </section>

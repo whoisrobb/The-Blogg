@@ -6,6 +6,7 @@ body {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
 }
 
 img {
@@ -14,6 +15,8 @@ img {
 
 .wrapper {
   max-width: 40rem;
+  min-width: 25rem;
+  margin: 4rem 0;
 }
 
 h1, h2, h3, h4, p {
@@ -56,10 +59,15 @@ button {
 /* HOME SECTION */
 #home {
   background: #333333;
-  padding: 4rem;
+  padding: 0 4rem;
+  min-height: 100vh;
 }
 #home h1 {
   font-family: "space grotesk";
+}
+#home .wrap {
+  position: relative;
+  top: 4rem;
 }
 #home .intro {
   width: 80%;
@@ -132,7 +140,7 @@ button {
 
 /* POST PAGE */
 #post {
-  padding: 4rem;
+  padding: 0 4rem;
   display: flex;
   justify-content: center;
   background: #ededed;
@@ -164,9 +172,139 @@ button {
   display: flex;
   justify-content: center;
   background: #ededed;
-  min-height: 80vh;
-  padding: 4rem;
+  min-height: 100vh;
+  font-family: "Nunito Sans";
+  color: #333333;
+}
+#edit form, #create form {
+  width: 100%;
+}
+#edit .categories-input, #create .categories-input {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+#edit .categories-input select, #create .categories-input select {
+  padding: 0.5rem;
+  background: transparent;
+  border: 2px solid rgba(51, 51, 51, 0.1);
+  font-family: "Nunito Sans";
+}
+#edit input.text, #create input.text {
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  border: 2px solid rgba(51, 51, 51, 0.1);
+  width: 100%;
+  background: transparent;
+  font-family: "Nunito Sans";
+}
+#edit input.text:valid, #create input.text:valid {
+  background: transparent;
+}
+#edit input.text::-moz-placeholder, #create input.text::-moz-placeholder {
+  font-family: "Nunito Sans";
+  margin-left: 0.5rem;
+}
+#edit input.text::placeholder, #create input.text::placeholder {
+  font-family: "Nunito Sans";
+  margin-left: 0.5rem;
+}
+#edit .file-input-container, #create .file-input-container {
+  border: 2px solid rgba(51, 51, 51, 0.1);
+  margin: 1rem 0;
+  width: 100%;
+}
+#edit .file-input-container input, #create .file-input-container input {
+  display: none;
+}
+#edit .file-input-container .file-label, #create .file-input-container .file-label {
+  display: inline-block;
+  padding: 10px 20px;
+  background: transparent;
+  color: #333333;
+  border: none;
+  cursor: pointer;
+}
+#edit .file-input-container .button, #create .file-input-container .button {
+  padding: 0.3rem 1rem;
+  font-family: "Nunito Sans";
+  border: 2px solid rgba(51, 51, 51, 0.1);
+}
+#edit .file-input-container .button:hover, #create .file-input-container .button:hover {
+  border: 2px solid rgba(37, 128, 255, 0.3);
+}
+#edit .quill, #create .quill {
+  margin-bottom: 3rem;
+  position: relative;
+}
+#edit .quill .ql-container, #create .quill .ql-container {
+  font-family: "Nunito Sans";
+  font-size: 1rem;
+  color: #333333;
+  border-top: 1px solid #ccc;
+}
+#edit .quill .ql-toolbar, #create .quill .ql-toolbar {
+  position: absolute;
+  bottom: -2.5rem;
+  left: 0;
+  right: 0;
+}
+#edit button.submit, #create button.submit {
+  width: 100%;
+  padding: 0.6rem;
+  font-family: "Nunito Sans";
+  color: #ededed;
+  background: #333333;
+  border: none;
 }
 
 /* CREATE PAGE */
-/* EDIT PAGE *//*# sourceMappingURL=App.css.map */
+/* EDIT PAGE */
+/* LOGIN & REGISTER PAGES */
+#register, #login {
+  height: 100vh;
+  width: 100vw;
+  background: #ededed;
+  display: flex;
+  justify-content: center;
+}
+#register form, #login form {
+  margin-top: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid black;
+  padding: 1rem;
+}
+#register form input, #login form input {
+  margin: 0.5rem;
+  padding: 0.5rem;
+}
+#register form label, #login form label {
+  width: 100%;
+}
+#register form input.password, #register form input.email, #register form input.username, #login form input.password, #login form input.email, #login form input.username {
+  width: 100%;
+}
+
+/* LOGIN PAGE */
+/* REGISTER */
+/* MEDIA QUERIES */
+@media (max-width: 768px) {
+  .wrapper {
+    width: 100%;
+    margin: 1rem;
+  }
+  #home {
+    padding: 0 1rem;
+  }
+  #home .intro h1 {
+    font-size: 3.5rem;
+  }
+  #home .posts {
+    grid-template-columns: 1fr;
+  }
+  #post {
+    padding: 0 1rem;
+  }
+}/*# sourceMappingURL=App.css.map */

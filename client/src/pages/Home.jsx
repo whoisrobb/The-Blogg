@@ -34,6 +34,7 @@ const Home = ({ userId }) => {
 
   return (
     <section id='home'>
+        <div className="wrap">
         <div className="intro">
             <h1>voyages, vitals, ventures, victory & vittles</h1>
         </div>
@@ -63,10 +64,11 @@ const Home = ({ userId }) => {
                                 <Link className='edit' to={`/edit/${post._id}`}>edit</Link>
                             : null
                         }
-                        <hr />
                     </div>
                 ))
             }
+        </div>
+            
         </div>
     </section>
   )

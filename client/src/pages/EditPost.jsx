@@ -55,7 +55,7 @@ const EditPost = () => {
 
         try {
             const response = await fetch(`${apiUrl}/users/update/${id}`, {
-                method: 'PATCH',
+                method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },

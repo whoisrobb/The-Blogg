@@ -1,21 +1,25 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { apiUrl } from '../utils/url'
+import { format } from 'date-fns'
 
 const Home = ({ userId }) => {
     const [posts, setPosts] = useState('')
 
-    const categories = ['health', 'career', 'travel', 'technology', 'food']
+    const categories = ['Health', 'Career', 'Travel', 'Technology', 'Food']
 
     useEffect(() => {
         fetchPosts()
     }, [])
 
-    const fetchPosts = async () => {
+    const fetchPosts = async (cat) => {
         try {
             fetch(`${apiUrl}/users/posts`, {
-                method: 'GET',
-                mode: 'cors'
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ category: cat })
             })
             .then((response) => {
                 if (!response.ok) {
@@ -43,7 +47,7 @@ const Home = ({ userId }) => {
             <button>all</button>
             {
                 categories.map((cat, index) => (
-                    <button key={index}>{cat}</button>
+                    <button onClick={() => fetchPosts(cat)} key={index}>{cat}</button>
                 ))
             }
         </div>
@@ -56,7 +60,7 @@ const Home = ({ userId }) => {
                         <Link to={`/post/${post._id}`}><h1>{post.title}</h1></Link>
                         <div className="details">
                             <Link to={'#'}>By {post.author.username}</Link>
-                            <p>{post.createdAt}</p>
+                            <p>{format(new Date(post.createdAt),  'MMMM dd, yyyy, hh:mm a')}</p>
                         </div>
                         <p className='summary'>{post.summary}</p>
                         {

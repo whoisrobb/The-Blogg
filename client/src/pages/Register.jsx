@@ -96,76 +96,68 @@ const Register = () => {
 
   return (
     <section id='register'>
-      <form onSubmit={handleSubmit}>
-        Register
-        
-        <div className="name">
-        {/* <label> */}
-          <input
-              type="text"
-              name='firstName'
-              className='firstName'
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-              placeholder='First Name'
-              required
-          />
-        {/* </label> */}
+      <div className="wrapper">
 
-        {/* <label> */}
-          <input
-              type="text"
-              name='lastName'
-              className='lastName'
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-              placeholder='Last Name'
-              required
-          />
-        {/* </label> */}
-        </div>
-
-        {/* <label> */}
-          <input
-              type="text"
-              name='username'
-              className='username'
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              placeholder='Username'
-              required
-          />
-        {/* </label> */}
-
-        {/* <label> */}
-          <input
-              type="text"
-              name='email'
-              className='email'
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder='E-Mail'
-              required
-          />
-        {/* </label> */}
-
-        {/* <label> */}
-          <input
-              type="password"
-              name='password'
-              className='password'
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder='Password'
-              required
-          />
-        {/* </label> */}
-
-        <button type='submit'>submit</button>
-      </form>
-      
-      <p>Already have an account?</p>
-      <Link to={'/login'}>Login</Link>
+        <div className="form-container">
+          <p className="title">Register</p>
+          <form className="form" onSubmit={handleSubmit}>
+          <div className="input-group">
+            <label htmlFor="firstname">First name</label>
+                      <input
+                          type="text"
+                          name="firstName"
+                          placeholder="first name"
+                          value={firstName}
+                          onChange={(e) => setFirstName(e.target.value)}
+                      />
+          </div>
+          <div className="input-group">
+            <label htmlFor="lastname">Last name</label>
+                      <input
+                          type="text"
+                          name="lastName"
+                          placeholder="last name"
+                          value={lastName}
+                          onChange={(e) => setLastName(e.target.value)}
+                      />
+          </div>
+          <div className="input-group">
+            <label htmlFor="username">Username</label>
+                      <input
+                          type="text"
+                          name="username"
+                          placeholder="username"
+                          value={username}
+                          onChange={(e) => setUsername(e.target.value)}
+                      />
+          </div>
+          <div className="input-group">
+            <label htmlFor="username">E-Mail</label>
+                      <input
+                          type="text"
+                          name="email"
+                          placeholder="email"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                      />
+          </div>
+          <div className="input-group">
+            <label htmlFor="password">Password</label>
+                      <input
+                          type="text"
+                          name="password"
+                          placeholder="password"
+                          value={password}
+                          onChange={(e) => setPassword(e.target.value)}
+                      />
+          </div>
+          <button className="sign" type='submit'>Register</button>
+          </form>
+          <p className="signup">Already have an account?
+          <Link to={'/login'} className="">Login</Link>
+          </p> 
+      </div>
+    </div>
     </section>
   )
 }

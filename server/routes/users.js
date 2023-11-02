@@ -7,7 +7,7 @@ const router = express.Router()
 
 
 /* GET ALL POSTS */
-router.get('/posts', getAllPosts)
+router.post('/posts', getAllPosts)
 
 
 /* CREATE POST */
@@ -19,7 +19,7 @@ router.get('/post/:id', getSinglePost)
 
 
 /* UPDATE A POST */
-router.patch('/update/:id', updatePost)
+router.put('/update/:id', updatePost)
 
 
 /* DELETE A POST */

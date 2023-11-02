@@ -4,7 +4,12 @@ import Post from "../models/post.js"
 /* GET ALL POSTS */
 export const getAllPosts = async (req, res) => {
     try {
-        res.status(201).json(await Post.find().populate('author', ['username']))
+        const { category } = req.body
+        
+        const filter = category ? { category } : {};
+
+        const posts = await Post.find(filter).populate('author', ['username'])
+        res.status(200).json(posts)
     } catch (err) {
         res.status(500).send({ err: err.message })
     }

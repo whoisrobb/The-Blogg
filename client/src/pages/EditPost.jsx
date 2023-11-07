@@ -1,27 +1,27 @@
 import React, { useEffect, useState } from 'react'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
-import { Navigate, useParams } from 'react-router-dom'
-import { apiUrl } from '../utils/url'
+import { apiUrl, categories, itemVars, wrapperVars } from '../utils/exports'
+import { AnimatePresence, motion } from 'framer-motion'
+import { useNavigate, useParams } from 'react-router-dom'
 
 const EditPost = () => {
     const { id } = useParams()
-    
+    const navigate = useNavigate()
+
     const [title, setTitle] = useState('')
     const [summary, setSummary] = useState('')
     const [content, setContent] = useState('')
-    const [selectedCategory, setSelectedCategory] = useState('')
-    const [success, setSuccess] = useState(false)
-
-    const formData = { title, summary, content, category: selectedCategory }
+    const [selectedCategory, setSelectedCategory] = useState('Health')
+    const [categoriesOpen, setCategoryOpen] = useState(false)
 
     useEffect(() => {
-        fetchPosts()
+        fetchPost(id)
     }, [])
 
-    const fetchPosts = async () => {
+    const fetchPost = async (postId) => {
         try {
-            const response = await fetch(`${apiUrl}/users/post/${id}`)
+            const response = await fetch(`${apiUrl}/users/post/${postId}`)
             const data = await response.json()
             setTitle(data.title)
             setSummary(data.summary)
@@ -31,53 +31,27 @@ const EditPost = () => {
             console.error(err)
         }
     }
-
-    const handleDelete = async () => {
-        try {
-            const response = await fetch(`${apiUrl}/users/delete/${id}`, {
-                method: 'DELETE',
-            })
-    
-            if (!response.ok) {
-                throw new Error('Failed to delete post');
-            }
-    
-            // Redirect to another page upon success
-            setSuccess(true)
-        } catch (err) {
-            console.error(err); // Log the error for debugging
-            setError(err.message); // Set the error state to display to the user
-        }
-    }    
-
+  
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        try {
-            const response = await fetch(`${apiUrl}/users/update/${id}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData)
-            })
-            .then((response) => {
-                if (response.ok) {
-                    setTitle('')
-                    setSummary('')
-                    setContent('')
-                }
-            })
-
-            setSuccess(true)
-        } catch (err) {
-            console.error(err)
-        }
+      try {
+        const response = await fetch(`${apiUrl}/users/update/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ title, summary, category: selectedCategory, content })
+        })
+        .then((response) => {
+            if (response.ok) {
+                navigate(`/post/${id}`)
+            }
+        })
+      } catch (err) {
+        console.error(err)
+      }
     }
-
-    console.log(formData)
-
-    if (success) return <Navigate to={'/'} />
 
   return (
     <section id='edit'>
@@ -89,6 +63,7 @@ const EditPost = () => {
                 <label>
                     <input
                         type="text"
+                        className="text"
                         name='title'
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
@@ -102,6 +77,7 @@ const EditPost = () => {
                 <label>
                     <input
                         type="text"
+                        className="text"
                         name='summary'
                         value={summary}
                         onChange={(e) => setSummary(e.target.value)}
@@ -111,26 +87,54 @@ const EditPost = () => {
                 </label>
             </div>
 
-            <div className='categories-input'>
-                <label htmlFor="categories">Select a Category:</label>
-                <select
-                    id="categories"
-                    name="categories"
-                    value={selectedCategory}
-                    onChange={(e) => setSelectedCategory(e.target.value)}
-                >
-                    <option value="health">Health</option>
-                    <option value="career">Career</option>
-                    <option value="technology">Technology</option>
-                    <option value="food">Food</option>
-                    <option value="travel">Travel</option>
-                </select>
+            <div className="cat-file">
+            <div className='categories-input' onMouseLeave={() => setCategoryOpen(false)}>
+              <div onClick={() => setCategoryOpen(prev => !prev)} className="select">
+                {selectedCategory}
+                <i className="uil uil-angle-down"></i>
+              </div>
+                <AnimatePresence>
+                  {categoriesOpen &&
+                    <motion.div
+                      variants={wrapperVars}
+                      initial='initial'
+                      animate='open'
+                      exit='exit'
+                      className="input">
+                      {categories.map((cat) => (
+                        <div key={cat} style={{ overflow: 'hidden' }}>
+                          <motion.div
+                            variants={itemVars}
+                            initial='initial'
+                            animate='open'
+                            exit='exit'
+                            className='option' onClick={() => {setSelectedCategory(cat); setCategoryOpen(false)}}>{cat}</motion.div>
+                        </div>
+                      ))}
+                  </motion.div>}
+                </AnimatePresence>
             </div>
 
+            {/* <div className="file-input-container">
+                <input
+                    type="file"
+                    className='file-input'
+                    id='file-input'
+                    onChange={(e) => setFiles(e.target.files[0])}
+                    aria-label="File browser example"
+                />
+                <label htmlFor='file-input' className="file-label">
+                    <span className="file-label-text">
+                        {files ? files.name : <div className='button'>Choose image</div>}
+                    </span>
+                </label>
+            </div> */}
+
+            </div>
+            
             <ReactQuill value={content} onChange={(value) => setContent(value)} />
 
-            <button className='submit' type='submit'>Edit Post</button>
-            <button className='delete' onClick={handleDelete}>Delete Post</button>
+            <button className='submit' type='submit'>Edit</button>
         </form>
         </div>
     </section>

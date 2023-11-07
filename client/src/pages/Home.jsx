@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
-import { apiUrl } from '../utils/url'
 import { format } from 'date-fns'
+import { Link, useNavigate } from 'react-router-dom'
+import { apiUrl, categories } from '../utils/exports'
 
-const Home = ({ userId }) => {
-    const [posts, setPosts] = useState('')
 
-    const categories = ['Health', 'Career', 'Travel', 'Technology', 'Food']
+const Home = () => {
+    const navigate = useNavigate()
+    const [posts, setPosts] = useState(null)
+    const [cat, setCat] = useState('')
+    const [pageValue, setPageValue] = useState(1)
 
     useEffect(() => {
-        fetchPosts()
-    }, [])
-
+        fetchPosts(cat)
+    }, [cat])
+    
     const fetchPosts = async (cat) => {
         try {
             fetch(`${apiUrl}/users/posts`, {
@@ -39,41 +41,46 @@ const Home = ({ userId }) => {
   return (
     <section id='home'>
         <div className="wrap">
-        <div className="intro">
-            <h1>voyages, vitals, ventures, victory & vittles</h1>
-        </div>
-
-        <div className="categories">
-            <button>all</button>
-            {
-                categories.map((cat, index) => (
-                    <button onClick={() => fetchPosts(cat)} key={index}>{cat}</button>
-                ))
-            }
-        </div>
-        
-        <div className="posts">
-            {
-                posts && posts.map((post) => (
-                    <div key={post._id} className='post'>
-                        <Link to={`/post/${post._id}`}><img src={`${apiUrl}/uploads/${post.imageUrl}`} alt="" /></Link>
-                        <Link to={`/post/${post._id}`}><h1>{post.title}</h1></Link>
+            <div className="intro">
+                <h1>Vitality, Vocation, Voyages, Vision & Vehicles</h1>
+            </div>
+            <div className="categories">
+                <button onClick={() => setCat('')} className="cat">all</button>
+                {categories.map((cat) => (
+                    <button onClick={() => setCat(cat)} className='cat' key={cat}>{cat}</button>
+                ))}
+            </div>
+            <div className="posts">
+                {posts && posts.map((post) => (
+                    <div key={post._id} className="post-item">
+                        <Link className='image' to={`/post/${post._id}`}>
+                            <div className="item"><img src={`${apiUrl}/uploads/${post.imageUrl}`} alt="" /></div>
+                        </Link>
+                        <h1 className='title'><Link to={`/post/${post._id}`}>{post.title}</Link></h1>
                         <div className="details">
                             <Link to={'#'}>By {post.author.username}</Link>
-                            <p>{format(new Date(post.createdAt),  'MMMM dd, yyyy, hh:mm a')}</p>
+                            <p>{format(new Date(post.createdAt),  'MMMM dd, yyyy')}</p>
                         </div>
-                        <p className='summary'>{post.summary}</p>
-                        {
-                            userId && userId == post.author._id ?
-                                <Link className='edit' to={`/edit/${post._id}`}>edit</Link>
-                            : null
-                        }
+                        <p className='summary'><Link to={`/post/${post._id}`}>{post.summary}</Link></p>
                     </div>
                 ))
-            }
+                }
+            </div>
+            <div className="pagination-wrap">
+                <div className="pagination">
+                    <button onClick={() => setPageValue(preValue => (preValue > 1 ? preValue - 1 : 1))}>
+                        <i className="uil uil-angle-left"></i>
+                    </button>
+                    <div className="page-value">{pageValue}</div>
+                    <button onClick={() => setPageValue(preValue => preValue + 1)}>
+                        <i className="uil uil-angle-right"></i>
+                    </button>
+                </div>
+            </div>
         </div>
-            
-        </div>
+        <button onClick={() => navigate('/create')} className="absolute-btn create">
+            <i className="uil uil-plus"></i>
+        </button>
     </section>
   )
 }

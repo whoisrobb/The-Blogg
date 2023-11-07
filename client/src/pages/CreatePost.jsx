@@ -1,52 +1,54 @@
-import jwtDecode from 'jwt-decode'
 import React, { useEffect, useState } from 'react'
 import ReactQuill from 'react-quill'
+import { jwtDecode } from 'jwt-decode'
 import 'react-quill/dist/quill.snow.css'
-import { apiUrl } from '../utils/url'
+import { apiUrl, categories, itemVars, wrapperVars } from '../utils/exports'
+import { AnimatePresence, motion } from 'framer-motion'
 
 const CreatePost = () => {
-    const [title, setTitle] = useState('')
-    const [summary, setSummary] = useState('')
-    const [content, setContent] = useState('')
-    const [author, setAuthor] = useState('')
-    const [files, setFiles] = useState(null)
-    const [selectedCategory, setSelectedCategory] = useState('Health')
+  const [title, setTitle] = useState('')
+  const [summary, setSummary] = useState('')
+  const [content, setContent] = useState('')
+  const [author, setAuthor] = useState('')
+  const [files, setFiles] = useState(null)
+  const [selectedCategory, setSelectedCategory] = useState('Health')
+  const [categoriesOpen, setCategoryOpen] = useState(false)
 
-    useEffect(() => {
-        const { id } = jwtDecode(localStorage.getItem('accessToken'))
-        setAuthor(id)
-    }, [])
+  useEffect(() => {
+    const { id } = jwtDecode(localStorage.getItem('accessToken'))
+    setAuthor(id)
+  }, [])
 
-    const handleSubmit = async (e) => {
-        e.preventDefault()
+  const handleSubmit = async (e) => {
+      e.preventDefault()
 
-        const formData = new FormData()
-        formData.append('title', title)
-        formData.append('summary', summary)
-        formData.append('author', author)
-        formData.append('content', content)
-        formData.append('category', selectedCategory)
-        formData.append('image', files)
+      const formData = new FormData()
+      formData.append('title', title)
+      formData.append('summary', summary)
+      formData.append('author', author)
+      formData.append('content', content)
+      formData.append('category', selectedCategory)
+      formData.append('image', files)
 
-        console.log(formData)
+      console.log(formData)
 
-        try {
-            const response = await fetch(`${apiUrl}/users/create`, {
-                method: 'POST',
-                mode: 'cors',
-                body: formData
-            })
-            .then((response) => {
-                if (response.ok) {
-                    setTitle('')
-                    setSummary('')
-                    setContent('')
-                }
-            })
-        } catch (err) {
-            console.error(err)
-        }
-    }
+      try {
+          const response = await fetch(`${apiUrl}/users/create`, {
+              method: 'POST',
+              mode: 'cors',
+              body: formData
+          })
+          .then((response) => {
+              if (response.ok) {
+                  setTitle('')
+                  setSummary('')
+                  setContent('')
+              }
+          })
+      } catch (err) {
+          console.error(err)
+      }
+  }
 
   return (
     <section id='create'>
@@ -82,20 +84,32 @@ const CreatePost = () => {
                 </label>
             </div>
 
-            <div className='categories-input'>
-                <label htmlFor="categories">Select a Category:</label>
-                <select
-                    id="categories"
-                    name="categories"
-                    value={selectedCategory}
-                    onChange={(e) => setSelectedCategory(e.target.value)}
-                >
-                    <option value="health">Health</option>
-                    <option value="career">Career</option>
-                    <option value="technology">Technology</option>
-                    <option value="food">Food</option>
-                    <option value="travel">Travel</option>
-                </select>
+            <div className="cat-file">
+            <div className='categories-input' onMouseLeave={() => setCategoryOpen(false)}>
+              <div onClick={() => setCategoryOpen(prev => !prev)} className="select">
+                {selectedCategory}
+                <i className="uil uil-angle-down"></i>
+              </div>
+                <AnimatePresence>
+                  {categoriesOpen &&
+                    <motion.div
+                      variants={wrapperVars}
+                      initial='initial'
+                      animate='open'
+                      exit='exit'
+                      className="input">
+                      {categories.map((cat) => (
+                        <div key={cat} style={{ overflow: 'hidden' }}>
+                          <motion.div
+                            variants={itemVars}
+                            initial='initial'
+                            animate='open'
+                            exit='exit'
+                            className='option' onClick={() => {setSelectedCategory(cat); setCategoryOpen(false)}}>{cat}</motion.div>
+                        </div>
+                      ))}
+                  </motion.div>}
+                </AnimatePresence>
             </div>
 
             <div className="file-input-container">
@@ -108,10 +122,13 @@ const CreatePost = () => {
                 />
                 <label htmlFor='file-input' className="file-label">
                     <span className="file-label-text">
-                        {files ? files.name : <div className='button'>Choose a file</div>}
+                        {files ? files.name : <div className='button'>Choose image</div>}
                     </span>
                 </label>
             </div>
+
+            </div>
+
             
             <ReactQuill value={content} onChange={(value) => setContent(value)} />
 

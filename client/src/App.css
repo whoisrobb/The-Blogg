@@ -585,10 +585,14 @@ button.absolute-btn .uil {
   body {
     padding: 0 1rem;
   }
+  .header nav {
+    display: none;
+  }
   #home .intro h1 {
-    font-size: 3rem;
+    font-size: 4rem;
   }
   #home .posts {
     grid-template-columns: 1fr;
+    margin: 0;
   }
 }/*# sourceMappingURL=App.css.map */

@@ -585,6 +585,9 @@ button.absolute-btn .uil {
   body {
     padding: 0 1rem;
   }
+  #home .intro h1 {
+    font-size: 3rem;
+  }
   #home .posts {
     grid-template-columns: 1fr;
   }

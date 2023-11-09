@@ -716,6 +716,13 @@ button.absolute-btn {
 
     #home {
 
+        .intro {
+
+            h1 {
+                font-size: 3rem;
+            }
+        }
+
         .posts {
             grid-template-columns: 1fr;
         }

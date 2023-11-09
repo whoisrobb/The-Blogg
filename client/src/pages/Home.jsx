@@ -38,6 +38,16 @@ const Home = () => {
         }
     }
 
+    const handleCreateButtonClick = () => {
+        const isLoggedIn = !!localStorage.getItem('accessToken')
+
+        if (isLoggedIn) {
+            navigate('/create')
+        } else {
+            navigate('/login')
+        }
+    }
+
   return (
     <section id='home'>
         <div className="wrap">
@@ -78,7 +88,7 @@ const Home = () => {
                 </div>
             </div>
         </div>
-        <button onClick={() => navigate('/create')} className="absolute-btn create">
+        <button onClick={handleCreateButtonClick} className="absolute-btn create">
             <i className="uil uil-plus"></i>
         </button>
     </section>

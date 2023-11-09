@@ -8,7 +8,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 const EditPost = () => {
     const { id } = useParams()
     const navigate = useNavigate()
-
+    
     const [title, setTitle] = useState('')
     const [summary, setSummary] = useState('')
     const [content, setContent] = useState('')

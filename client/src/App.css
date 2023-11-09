@@ -120,6 +120,33 @@ button.absolute-btn .uil {
   text-transform: capitalize;
   font-weight: lighter;
 }
+.header .profile {
+  position: relative;
+}
+.header .profile .login-card {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 10rem;
+  background: rgb(18, 18, 18);
+  padding: 1rem;
+  box-shadow: 0 7px 10px rgba(0, 0, 0, 0.2);
+  color: rgb(198, 198, 198);
+  font-family: "Nunito Sans";
+}
+.header .profile .login-card p {
+  border-bottom: 1px solid rgb(135, 135, 135);
+  padding: 0.5rem 0;
+}
+.header .profile .login-card button {
+  margin: 0.5rem 0;
+  padding: 0.2rem 0.5rem;
+  border: 1px solid rgb(135, 135, 135);
+}
+.header .profile .login-card button:hover {
+  background: rgb(198, 198, 198);
+  color: rgb(18, 18, 18);
+}
 
 /* HOME */
 #home .intro {
@@ -439,6 +466,10 @@ button.absolute-btn .uil {
 }
 
 /* LOGIN AND REGISTER */
+#login, #register {
+  display: flex;
+  justify-content: center;
+}
 #login .wrapper, #register .wrapper {
   display: flex;
   justify-content: center;
@@ -548,4 +579,13 @@ button.absolute-btn .uil {
   font-size: 0.75rem;
   line-height: 1rem;
   color: rgb(156, 163, 175);
+}
+
+@media only screen and (max-width: 767px) {
+  body {
+    padding: 0 1rem;
+  }
+  #home .posts {
+    grid-template-columns: 1fr;
+  }
 }/*# sourceMappingURL=App.css.map */

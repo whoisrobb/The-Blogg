@@ -146,6 +146,38 @@ button.absolute-btn {
             }
         }
     }
+
+    .profile {
+        position: relative;
+
+        .login-card {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 10rem;
+            background: $black;
+            padding: 1rem;
+            box-shadow: 0 7px 10px rgba(0, 0, 0, .2);
+            color: $light;
+            font-family: $sans;
+
+            p {
+                border-bottom: 1px solid $dark;
+                padding: 0.5rem 0;
+            }
+
+            button {
+                margin: 0.5rem 0;
+                padding: .2rem .5rem;
+                border: 1px solid $dark;
+
+                &:hover {
+                    background: $light;
+                    color: $black;
+                }
+            }
+        }
+    }
 }
 
 
@@ -542,6 +574,8 @@ button.absolute-btn {
 
 /* LOGIN AND REGISTER */
 #login, #register {
+    display: flex;
+    justify-content: center;
 
     .wrapper {
         // background: red;
@@ -672,4 +706,22 @@ button.absolute-btn {
         color: rgba(156, 163, 175, 1);
       }
       
+}
+
+
+@media only screen and (max-width: 767px) {
+    body {
+        padding: 0 1rem;
+    }
+
+    #home {
+
+        .posts {
+            grid-template-columns: 1fr;
+        }
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+
 }

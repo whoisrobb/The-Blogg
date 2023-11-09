@@ -1,13 +1,49 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { AnimatePresence, motion } from 'framer-motion'
+import React, { useEffect, useState } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { motion } from 'framer-motion'
 import { legalVars, linkVars } from '../utils/exports'
+import LoggedInCard from './LoggedInCard'
+import { jwtDecode } from 'jwt-decode'
 
 const linkPages = ['bookmarks', 'about']
 const legalInformation = ['terms of service', 'privacy policy', 'FAQs']
 
 const Header = () => {
+    const location = useLocation()
+    const navigate = useNavigate()
+
     const [legalOpen, setLegalOpen] = useState(false)
+    const [loginOpen, setLoginOpen] = useState(false)
+    const [loginStatus, setLoginStatus] = useState(!!localStorage.getItem('accessToken'))
+    const [tokenData, setTokenData] = useState(null)
+
+    useEffect(() => {
+        if (loginStatus) {
+            const data = jwtDecode(localStorage.getItem('accessToken'))
+            setTokenData(data)
+            console.log(tokenData)
+        }
+    }, [])
+
+    useEffect(() => {
+        handleLogStatus()
+    }, [location.pathname])
+
+    const handleLogStatus = () => {
+        const accessToken = localStorage.getItem('accessToken')
+        setLoginStatus(!!accessToken)
+    }
+
+    const handleLogout = () => {
+        localStorage.removeItem('accessToken')
+    }
+
+    function getFirstLetters(inputString) {
+        const words = inputString.split(' ')
+        const firstLetters = words.map((word) => word.charAt(0))
+        const result = firstLetters.join('')
+        return result
+    }
 
   return (
     <div className='header'>
@@ -40,8 +76,16 @@ const Header = () => {
                 </motion.ul>
             </motion.div>
         </nav>
-        <div className="profile">
-            <button>profile</button>
+        <div onMouseLeave={() => setLoginOpen(false)} className="profile">
+            {/* <button>logout</button> */}
+            {loginStatus ?
+                <>
+                    {tokenData && <button onClick={() => setLoginOpen(prev => !prev)}>{getFirstLetters(tokenData.username)}</button>}
+                    {loginOpen && <LoggedInCard handleLogout={handleLogout} handleLogStatus={handleLogStatus} tokenData={tokenData} />}
+                </>
+                :
+                <button onClick={() => navigate('/login')}>Anonymous</button>
+            }
         </div>
     </div>
   )

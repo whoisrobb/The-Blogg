@@ -4,8 +4,19 @@ import { jwtDecode } from 'jwt-decode'
 import 'react-quill/dist/quill.snow.css'
 import { apiUrl, categories, itemVars, wrapperVars } from '../utils/exports'
 import { AnimatePresence, motion } from 'framer-motion'
+import { useNavigate } from 'react-router-dom'
 
 const CreatePost = () => {
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        const access = localStorage.getItem('accessToken')
+
+        if (!access) {
+            navigate('/login')
+        }
+    }, [])
+
   const [title, setTitle] = useState('')
   const [summary, setSummary] = useState('')
   const [content, setContent] = useState('')

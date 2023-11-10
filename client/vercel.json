@@ -1,18 +1,38 @@
 {
-    "routes": [
-      { "handle": "filesystem" },
-      {
-        "src": "/.*",
-        "dest": "/index.html",
-        "status": 200
-      }
+    "version": 2,
+    "builds": [
+        {
+            "src": "build/**",
+            "use": "@now/static-build",
+            "config": { "distDir": "build" }
+        }
     ],
-    "rewrites": [
-      { "source": "/post/:id", "destination": "/index.html" },
-      { "source": "/create", "destination": "/index.html" },
-      { "source": "/edit/:id", "destination": "/index.html" },
-      { "source": "/login", "destination": "/index.html" },
-      { "source": "/register", "destination": "/index.html" }
+    "routes": [
+        { "handle": "filesystem" },
+        { "src": "/static/(.*)", "dest": "/static/$1" },
+        {
+            "src": "/post/:id",
+            "dest": "/index.html"
+        },
+        {
+            "src": "/create",
+            "dest": "/index.html"
+        },
+        {
+            "src": "/edit/:id",
+            "dest": "/index.html"
+        },
+        {
+            "src": "/login",
+            "dest": "/index.html"
+        },
+        {
+            "src": "/register",
+            "dest": "/index.html"
+        },
+        {
+            "src": "/.*",
+            "dest": "/index.html"
+        }
     ]
-  }
-  
+}  

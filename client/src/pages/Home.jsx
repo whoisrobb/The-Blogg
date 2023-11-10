@@ -76,7 +76,7 @@ const Home = () => {
                 ))
                 }
             </div>
-            <div className="pagination-wrap">
+            {/* <div className="pagination-wrap">
                 <div className="pagination">
                     <button onClick={() => setPageValue(preValue => (preValue > 1 ? preValue - 1 : 1))}>
                         <i className="uil uil-angle-left"></i>
@@ -86,7 +86,7 @@ const Home = () => {
                         <i className="uil uil-angle-right"></i>
                     </button>
                 </div>
-            </div>
+            </div> */}
         </div>
         <button onClick={handleCreateButtonClick} className="absolute-btn create">
             <i className="uil uil-plus"></i>

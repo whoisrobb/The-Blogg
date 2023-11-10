@@ -9,7 +9,7 @@
     ],
     "routes": [
         { "handle": "filesystem" },
-        { "src": "/static/(.*)", "dest": "/static/$1" },
+        { "src": "/[^.]+", "dest": "/" },
         {
             "src": "/post/:id",
             "dest": "/index.html"
@@ -35,4 +35,4 @@
             "dest": "/index.html"
         }
     ]
-}  
+} 

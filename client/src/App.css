@@ -120,6 +120,20 @@ button.absolute-btn .uil {
   text-transform: capitalize;
   font-weight: lighter;
 }
+.header .end {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.header .end button.action {
+  border: 1px solid rgb(135, 135, 135);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.header .end button.menu {
+  display: none;
+}
 .header .profile {
   position: relative;
 }
@@ -585,8 +599,21 @@ button.absolute-btn .uil {
   body {
     padding: 0 1rem;
   }
+  .header {
+    position: relative;
+  }
+  .header .end button.menu {
+    display: flex;
+  }
   .header nav {
-    display: none;
+    position: absolute;
+    background: rgb(18, 18, 18);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    top: 90%;
+    right: 0;
+    flex-direction: column;
+    align-items: flex-end;
+    z-index: 100;
   }
   #home .intro h1 {
     font-size: 4rem;

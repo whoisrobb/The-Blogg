@@ -12,6 +12,7 @@ const Header = () => {
     const location = useLocation()
     const navigate = useNavigate()
 
+    const [menuOpen, setMenuOpen] = useState(false)
     const [legalOpen, setLegalOpen] = useState(false)
     const [loginOpen, setLoginOpen] = useState(false)
     const [loginStatus, setLoginStatus] = useState(!!localStorage.getItem('accessToken'))
@@ -48,7 +49,7 @@ const Header = () => {
   return (
     <div className='header'>
         <Link className='logo' to={'/'}>The Blogg</Link>
-        <nav>
+        {menuOpen && <nav>
             {linkPages.map((page, index) => (
                 <Link to={`/${page}`} key={index}>{page}</Link>
             ))}
@@ -75,17 +76,19 @@ const Header = () => {
                     ))}
                 </motion.ul>
             </motion.div>
-        </nav>
-        <div onMouseLeave={() => setLoginOpen(false)} className="profile">
-            {/* <button>logout</button> */}
-            {loginStatus ?
-                <>
-                    {tokenData && <button onClick={() => setLoginOpen(prev => !prev)}>{getFirstLetters(tokenData.username)}</button>}
-                    {loginOpen && <LoggedInCard handleLogout={handleLogout} handleLogStatus={handleLogStatus} tokenData={tokenData} />}
-                </>
-                :
-                <button onClick={() => navigate('/login')}>Anonymous</button>
-            }
+        </nav>}
+        <div className='end'>
+            <div onMouseLeave={() => setLoginOpen(false)} className="profile">
+                {loginStatus ?
+                    <>
+                        {tokenData && <button className='action' onClick={() => {setLoginOpen(prev => !prev); setMenuOpen(false);}}>{getFirstLetters(tokenData.username)}</button>}
+                        {loginOpen && <LoggedInCard handleLogout={handleLogout} handleLogStatus={handleLogStatus} tokenData={tokenData} />}
+                    </>
+                    :
+                    <button onClick={() => navigate('/login')}>Anonymous</button>
+                }
+            </div>
+            <button onClick={() => {setMenuOpen(prev => !prev); setLoginOpen(false);}} className="action menu"><i className='uil uil-bars'></i></button>
         </div>
     </div>
   )

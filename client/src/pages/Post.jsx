@@ -4,6 +4,7 @@ import BackButton from '../components/BackButton'
 import { apiUrl, legalVars, linkVars } from '../utils/exports'
 import { format } from 'date-fns'
 import { motion } from 'framer-motion'
+import ScrollToTopButton from '../components/ScrollToTopButton'
 
 const Post = () => {
     const { id } = useParams()
@@ -89,6 +90,7 @@ const Post = () => {
                 }
             </div>
         </div>
+        <ScrollToTopButton />
     </section>
   )
 }
